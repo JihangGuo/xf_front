@@ -162,16 +162,10 @@ export default {
                 data: [],
                 daily: dayjs().format("YYYY-MM-DD"),
             },
-            weekData: {},
-            monthData: {
-                dirlist: {
-                    dirx: '',
-                    dird: '',
-                    dirq: '',
-                    dirm: '',
-                    dirs: '',
-                },
-                toplist: {},
+            labelLine: {
+              normal: {
+                show: false
+              }
             },
             labelLine: {
               normal: {
@@ -252,7 +246,7 @@ export default {
   mounted() {
     this.drawLinePie() //扇形图
     // 初始化月份
-    this.checkTab = dayjs().month() + 1
+    this.checkTab = dayjs().month() +1 
     let _this = this
     // let enddate = dayjs().format("YYYY-MM-DD");
     // let begindate= dayjs().subtract(1,'month').format("YYYY-MM-DD");
