@@ -127,69 +127,51 @@ import picOne from './../assets/u106.png'
 import picTwo from './../assets/u109.png'
 import picThree from './../assets/u143.png'
 import picFour from './../assets/u108.png'
+import dirx from './../assets/dirx.png';
+import dird from './../assets/dird.png';
+import dirm from './../assets/dirm.png';
+import dirs from './../assets/dirs.png';
+import dirq from './../assets/dirq.png';
 
 let dayjs = require('dayjs')
 
 const picDic = {
-  dirx: './../assets/dirx.png',
-  dird: './../assets/dird.png',
-  dirm: './../assets/dirm.png',
-  dirs: './../assets/dirs.png',
-  dirq: './../assets/dirq.png'
-}
+    "旭日苑" :dirx,
+    "东升苑": dird,
+    "美广": dirm,
+    "超市": dirs,
+    "其他": dirq,
+    "无": dirq,
+};
 
 export default {
-  data() {
-    return {
-      checkTab: 0,
-      monthLen: 0,
-      imgOne: picOne,
-      imgTwo: picTwo,
-      imgThree: picThree,
-      imgFour: picFour,
-      imgRed: Red,
-      balance: '',
-      cost: '',
-      dayData: {
-        pay: '',
-        data: [],
-        daily: dayjs().format('YYYY-MM-DD')
-      },
-      weekData: {},
-      monthData: {
-        dirlist: {
-          dirx: '',
-          dird: '',
-          dirq: '',
-          dirm: '',
-          dirs: ''
-        },
-        toplist: {}
-      },
-      getPieOption: {
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
-        },
-        color: ['#48cda6', '#968ade', '#fd87ab', '#FF69B4'], //,'#ffdf33'
-        series: [
-          {
-            name: '数据来源',
-            type: 'pie',
-            radius: ['50%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-              normal: {
-                show: false,
-                position: 'center'
-              },
-              emphasis: {
-                show: false,
-                textStyle: {
-                  fontSize: '30',
-                  fontWeight: 'bold'
-                }
-              }
+    data() {
+        return {
+            picDic: picDic,
+            checkTab: 0,
+            monthLen: 0,
+            imgOne: picOne,
+            imgTwo: picTwo,
+            imgThree: picThree,
+            imgFour: picFour,
+            imgRed: Red,
+            balance: '',
+            cost: '',
+            dayData: {
+                pay: '',
+                data: [],
+                daily: dayjs().format("YYYY-MM-DD"),
+            },
+            weekData: {},
+            monthData: {
+                dirlist: {
+                    dirx: '',
+                    dird: '',
+                    dirq: '',
+                    dirm: '',
+                    dirs: '',
+                },
+                toplist: {},
             },
             labelLine: {
               normal: {

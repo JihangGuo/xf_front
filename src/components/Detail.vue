@@ -1,16 +1,19 @@
 <template>
 <div>
     <el-collapse v-model="activeNames" @change="handleChange" >
-        <el-collapse-item :title="key.key" :name="key.key" v-for="key in detailKey" :key="key.key">
-            <el-card shadow="hover" v-for="item in detailDic[key.key]" :key="item.txdate" >
-             <div slot="header" class="clearfix">
-                <span>{{item.txdate}}</span>
-                <el-tag style="float: right">{{item.txamt}}</el-tag>
-            </div>
-            <div class="text item">
-                {{item.shopname}}
-            </div>
-        </el-card>
+        <el-collapse-item :name="key.key" v-for="key in detailKey" :key="key.key">
+            <template slot="title">
+                <span>{{key.key}}</span>
+                <span>{{'星期' + key.week}}</span>
+            </template>
+            
+            <el-card shadow="hover" v-for="item in detailDic[key.key]" :key="item.txdate" class="box-card">
+                <img :src="picDic[item.dir]" alt="类型图标">
+                <el-tag style="float: right">{{'¥' + Math.abs(item.txamt)}}</el-tag>
+                <span>{{item.dir}}</span>
+                <span>{{item.shopname}}</span>
+            </el-card>
+
         </el-collapse-item>
     </el-collapse>
 </div>
@@ -21,17 +24,26 @@
 <script>
 let dayjs = require('dayjs');
 
+import dirx from './../assets/dirx.png';
+import dird from './../assets/dird.png';
+import dirm from './../assets/dirm.png';
+import dirs from './../assets/dirs.png';
+import dirq from './../assets/dirq.png';
+
+// 分类图标字典
 const picDic = {
-    dirx: './../assets/dirx.png',
-    dird: './../assets/dird.png',
-    dirm: './../assets/dirm.png',
-    dirs: './../assets/dirs.png',
-    dirq: './../assets/dirq.png',
+    "旭日苑" :dirx,
+    "东升苑": dird,
+    "美广": dirm,
+    "超市": dirs,
+    "其他": dirq,
+    "无": dirq,
 };
 
 export default {
     data() {
         return {
+            picDic: picDic,
             activeNames: ['1'],
             detailData: [],
             cost: '',
@@ -59,12 +71,12 @@ export default {
                             orderBydate[theDay].push(item);
                         } else {
                             orderByKey.push({
-                                key: theDay
+                                key: theDay,
+                                week: dayjs(theDay).day()
                             });
                             orderBydate[theDay] = [item];
                         }
                     }
-                    console.log(orderByKey);
                     _this.detailDic = orderBydate;
                     _this.detailKey = orderByKey;
                     _this.detailData = res.data.data;
