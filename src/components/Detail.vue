@@ -14,10 +14,10 @@
             </template>
             
             <el-card shadow="hover" v-for="item in detailDic[key.key]" :key="item.txdate" class="box-card">
-                <img :src="picDic[item.dir]" alt="类型图标">
-                <el-tag style="float: right">{{'¥' + Math.abs(item.txamt)}}</el-tag>
-                <span>{{item.dir}}</span>
-                <span>{{item.shopname}}</span>
+                <img :src="picDic[item.dir]" alt="类型图标" style="width: 50px;float: left;margin-right: 10px;">
+                <el-tag type="danger" style="float: right;margin-top: 7px;color: #ff0000;">{{'¥' + Math.abs(item.txamt)}}</el-tag>
+                <p>{{item.dir}}</p>
+                <p style="font-size: 12px;color: #999;">{{item.shopname}}</p>
             </el-card>
 
         </el-collapse-item>
