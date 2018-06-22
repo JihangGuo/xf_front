@@ -77,7 +77,7 @@ import LOGO from "../assets/logo.jpg";
 export default {
     data() {
         return {
-            checkImg: "http://118.126.110.182:8002/static/img/chckcode.jpg",
+            checkImg: "/static/img/chckcode.jpg",
             logo: LOGO,
             ruleForm: {
                 cardpwd: "",
@@ -114,7 +114,7 @@ export default {
         // 刷新验证码
         getAgainCode() {
             // 强制刷新 1为刷新页面 2为刷新图片
-            window.location.replace("http://118.126.110.182:8002")
+            window.location.replace("http://yktcx.xupt.org")
             // _this.checkImg = 'http://118.126.110.182:8002/static/img/chckcode.jpg?' + new Date().valueOf();
         },
         // 获取指定cookie值
@@ -136,7 +136,7 @@ export default {
                     let _this = this;
                     _this.submitLoading = true;
                     _this.$http({
-                            url: "http://118.126.110.182:8002/api/check",
+                            url: "/api/check",
                             method: "get",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"

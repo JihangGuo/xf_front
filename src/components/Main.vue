@@ -167,13 +167,6 @@
 
 
 <script>
-// import * as echarts from 'echarts'
-
-import Red from './../assets/u107.png'
-import picOne from './../assets/u106.png'
-import picTwo from './../assets/u109.png'
-import picThree from './../assets/u143.png'
-import picFour from './../assets/u108.png'
 import dirx from './../assets/dirx.png';
 import dird from './../assets/dird.png';
 import dirm from './../assets/dirm.png';
@@ -197,11 +190,6 @@ export default {
             picDic: picDic,
             checkTab: 0,
             monthLen: 0,
-            imgOne: picOne,
-            imgTwo: picTwo,
-            imgThree: picThree,
-            imgFour: picFour,
-            imgRed: Red,
             balance: '',
             cost: '',
             dayData: {
@@ -348,7 +336,7 @@ created() {
 
         // 获取余额 截止到上个月当前日期
         _this.$http({
-                url: 'http://118.126.110.182:8002/api/getNewData',
+                url: '/api/getNewData',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -371,7 +359,7 @@ created() {
 
         // 获取本月支出数据
         _this.$http({
-                url: 'http://118.126.110.182:8002/api/getOneMonthData',
+                url: '/api/getOneMonthData',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -393,7 +381,7 @@ created() {
         // let endWeek = dayjs().endOf('week').format('YYYY-MM-DD');
         _this
             .$http({
-                url: 'http://118.126.110.182:8002/api/getOneWeekData',
+                url: '/api/getOneWeekData',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -453,7 +441,7 @@ created() {
 
             _this
                 .$http({
-                    url: 'http://118.126.110.182:8002/api/getNewData',
+                    url: '/api/getNewData',
                     method: 'get',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

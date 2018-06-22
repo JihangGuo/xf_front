@@ -73,7 +73,7 @@ export default {
     mounted() {
         let _this = this
         _this.$http({
-                url: "http://118.126.110.182:8002/api/getOneMonthData",
+                url: "/api/getOneMonthData",
                 method: "get",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
