@@ -83,6 +83,8 @@
     <el-col :span="24">
         <div class="tabs">
             <el-tabs
+                style="width: 100%"
+                :stretch="true"
                 v-model="checkTab"
                 @tab-click="handleClick"
                 class="tabsWidth"
@@ -105,10 +107,10 @@
             <div style="margin-left: 5px;display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
             <span>支出分类</span>
         </div>
-        <el-col :span="14">
+        <el-col :span="12">
             <div id="pie"></div>
         </el-col>
-        <el-col :span="10" style="margin-top: 40px; width: 140px">
+        <el-col :span="12" style="margin-top: 20px;">
                 <div class="vertical">
                     <div class="padding">
                         <div style="display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
@@ -553,6 +555,15 @@ created() {
             }
 
             this.lineBar.setOption({
+              noDataLoadingOption: {
+                text: "当月无消费数据",
+                effect: "bubble",
+                effectOption: {
+                  effect: {
+                    n: 5,
+                  }
+                }
+              },
                 // title: {
                 //     //标题组件
                 //     text: '吃货统计',
@@ -616,7 +627,7 @@ created() {
 
 #pie {
     width: 100%;
-    height: 270px;
+    height: 250px;
 }
 
 .qq {
