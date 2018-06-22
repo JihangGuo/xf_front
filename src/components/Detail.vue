@@ -1,7 +1,7 @@
 <template>
 <div>
     <el-collapse v-model="activeNames" @change="handleChange" >
-        <el-collapse-item :name="key.key" v-for="key in detailKey" :key="key.key">
+        <el-collapse-item style="padding: 0px" :name="key.key" v-for="key in detailKey" :key="key.key">
             <template slot="title">
                 <img
                     :src="imgOne"
@@ -13,9 +13,9 @@
                 <span style="margin-right: 50px; float: right">{{'星期' + turnWeek[key.week]}}</span>
             </template>
             
-            <el-card shadow="hover" v-for="item in detailDic[key.key]" :key="item.txdate" class="box-card">
-                <img :src="picDic[item.dir]" alt="类型图标" style="width: 50px;float: left;margin-right: 10px;">
-                <el-tag type="danger" style="float: right;margin-top: 7px;color: #ff0000;">{{'¥' + Math.abs(item.txamt)}}</el-tag>
+            <el-card shadow="hover" v-for="item in detailDic[key.key]" :key="item.txdate" style="display: block; height: 80px">
+                <img :src="picDic[item.dir]" alt="类型图标" style="width: 50px;float: left;margin: 0px 10px;">
+                <span style="float: right;margin-top: 7px;color: #ff0000;margin-right: 50px;">{{'¥' + Number(Math.abs(item.txamt)).toFixed(1) }}</span>
                 <p>{{item.dir==='无'?'其他':item.dir}}</p>
                 <p style="font-size: 12px;color: #999;">{{item.shopname==='无'?'其他':item.shopname}}</p>
             </el-card>
@@ -30,7 +30,6 @@
 <script>
 let dayjs = require('dayjs');
 import picOne from './../assets/u106.png'
-
 import dirx from './../assets/dirx.png';
 import dird from './../assets/dird.png';
 import dirm from './../assets/dirm.png';
@@ -185,4 +184,9 @@ export default {
     background-color: #ebeef56e;
     min-height: 42px;
 }
+
+.el-collapse-item__content {
+    padding: 0px !important;
+}
+
 </style>

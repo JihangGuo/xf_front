@@ -1,13 +1,14 @@
+const env = process.env.NODE_ENV;
 var path = require('path')
 var webpack = require('webpack')
-var UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-var CompressionWebpackPlugin = require('compression-webpack-plugin')
+var CompressionWebpackPlugin = require('compression-webpack-plugin') // gzip插件
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; // 模块依赖分析插件
 
 module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: '/static/dist/',
     filename: 'build.js'
   },
   module: {
@@ -32,16 +33,9 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      // {
-      //   test: /\.(png|jpg|gif|svg)$/,
-      //   loader: 'file-loader',
-      //   options: {
-      //     name: '[name].[ext]?[hash]'
-      //   }
-      // },
       {
         test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-        loader: 'url-loader?limit=8192&name=[path][name].[ext]',
+        loader: 'url-loader?limit=8192&name=src/assets/[name].[ext]',
       },
     ]
   },
@@ -60,25 +54,16 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#cheap-module-source-map',
-  
+  devtool: 'cheap-module-source-map',
 }
-// 判断当前环境
-if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = false
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+
+// 判断当前环境为生产环境
+if (env === 'production' || env === 'analyz') {
+  module.exports.devtool = 'cheap-module-source-map',
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        comments: false,        //去掉注释
-        compress: {
-            warnings: false    //忽略警告
-        }
       }
     }),
     new CompressionWebpackPlugin({ //gzip 压缩
@@ -89,9 +74,27 @@ if (process.env.NODE_ENV === 'production') {
       ),
       threshold: 10240,
       minRatio: 0.8
-  }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ])
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+        // 最紧凑的输出
+        beautify: false,
+        // 删除所有的注释
+        comments: false,
+        compress: {
+            // 在UglifyJs删除没有用到的代码时不输出警告
+            warnings: false,
+            // 删除所有的 `console` 语句
+            drop_console: false,
+            // 内嵌定义了但是只用到一次的变量
+            collapse_vars: true,
+            // 提取出出现多次但是没有定义成变量去引用的静态值
+            reduce_vars: true
+        }
+    }),
+  ]);
+  if (env === 'analyz') {
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new BundleAnalyzerPlugin()
+    ]);
+  }
 }

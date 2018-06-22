@@ -1,35 +1,38 @@
 <template>
 <div>
-    <el-row>
+    <el-row style="height: 60px">
         <el-col :span="12">
             <div class="grid-content bg-purple cash">
                 <p class="text-cash">账户余额<br>
-                    <span class="text-cash-span">{{parseInt(balance)}}</span>
+                    <span class="text-cash-span">{{Number(balance).toFixed(1)}}</span>
                 </p>
             </div>
         </el-col>
         <el-col :span="12">
             <div class="grid-content bg-purple-light cash">
                 <p class="text-cash">本月支出<br>
-                    <span class="text-cash-span">{{parseInt(cost)}}</span>
+                    <span class="text-cash-span">{{Number(cost).toFixed(1)}}</span>
                 </p>
             </div>
         </el-col>
     </el-row>
-
-    <div class="con_flow">
-        <img
-            :src="imgRed"
-            alt=""
-            class="ll"
-        >
-            <span class="ss">消费流水</span>
+    <div>
+            <div style="margin-left: 5px;display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
+            <span>消费流水</span>
     </div>
     <el-row>
         <el-col :span="12">
             <div class="grid-content bg-purple">
                 <p class="date">{{dayData.daily}}</p>
             </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="grid-content bg-purple-light right">
+                <p class="date" style="text-align: right">{{'本周支出 ¥' + Number(dayData.pay).toFixed(1)}}</p>
+            </div>
+        </el-col>
+        <el-col :span="12">
+            
             <div class="conPlace">
                 <div
                     class="place qq"
@@ -48,21 +51,18 @@
                             <p class="shopname">{{item.shopname==='无'?'其他':item.shopname}}</p>
                         </div>
                     </div>
-            </div>
-</div>
-</el-col>
-
-<el-col :span="12">
-    <div class="grid-content bg-purple-light right">
-        <p class="pay">今日支出{{dayData.pay}}</p>
-    </div>
-    <div
-        class="content"
-        v-for="item in dayData.data"
-    >
-        <p class="payDetail">{{item.txamt}}</p>
-        </div>
-</el-col>
+              </div>
+             </div>
+        </el-col>
+        <el-col :span="12">
+            
+            <div
+                class="content"
+                v-for="item in dayData.data"
+            >
+                <p class="payDetail">{{Number(item.txamt).toFixed(1)}}</p>
+                </div>
+        </el-col>
 
 <el-col :span="24">
     <div class="viewAll">
@@ -100,76 +100,61 @@
         </div>
     </el-col>
     </el-row>
-    <el-row>
-        <el-col :span="9">
+    <el-row style="margin: 20px 0px">
+        <div>
+            <div style="margin-left: 5px;display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
+            <span>支出分类</span>
+        </div>
+        <el-col :span="14">
             <div id="pie"></div>
         </el-col>
-        <el-col :span="15">
-            <div class="">
+        <el-col :span="10" style="margin-top: 40px; width: 140px">
                 <div class="vertical">
                     <div class="padding">
-                        <img
-                            :src="imgOne"
-                            alt=""
-                            class="icon ll"
-                        >
-                            <p class="middle">旭日苑
-                                <span class="middleInline">{{parseInt(monthData.dirlist.dirx)}}</span>
-                            </p>
+                        <div style="display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
+                        <p class="middle">旭日苑
+                            <span class="middleInline">{{Number(monthData.dirlist.dirx).toFixed(1)}}</span>
+                        </p>
                     </div>
                     <div class="padding">
-                        <img
-                            :src="imgTwo"
-                            alt=""
-                            class="icon ll"
-                        >
+                        <div style="display: inline-block; width: 10px; height: 10px; background: #33CC66; border-radius: 50%"></div>
                             <p class="middle">东升苑
-                                <span class="middleInline">{{parseInt(monthData.dirlist.dird)}}</span>
+                                <span class="middleInline">{{Number(monthData.dirlist.dird).toFixed(1)}}</span>
                             </p>
                     </div>
                     <div class="padding">
-                        <img
-                            :src="imgTwo"
-                            alt=""
-                            class="icon ll"
-                        >
+                        <div style="display: inline-block; width: 10px; height: 10px; background: #FF9966; border-radius: 50%"></div>
                             <p class="middle">美广
-                                <span class="middleInline">{{parseInt(monthData.dirlist.dirm)}}</span>
+                                <span class="middleInline">{{Number(monthData.dirlist.dirm).toFixed(1)}}</span>
                             </p>
                     </div>
                     <div class="padding">
-                        <img
-                            :src="imgThree"
-                            alt=""
-                            class="icon ll"
-                        >
+                        <div style="display: inline-block;width: 10px; height: 10px; background: #9966CC; border-radius: 50%"></div>
                             <p class="middle">超市
-                                <span class="middleInline">{{parseInt(monthData.dirlist.dirs)}}</span>
+                                <span class="middleInline">{{Number(monthData.dirlist.dirs).toFixed(1)}}</span>
                             </p>
                     </div>
                     <div class="padding">
-                        <img
-                            :src="imgFour"
-                            alt=""
-                            class="icon ll"
-                        >
+                        <div style="display: inline-block;width: 10px; height: 10px; background: #3399FF; border-radius: 50%"></div>
                             <p class="middle">其他
-                                <span class="middleInline">{{parseInt(monthData.dirlist.dirq)}}</span>
+                                <span class="middleInline">{{Number(monthData.dirlist.dirq).toFixed(1)}}</span>
                             </p>
                     </div>
                 </div>
-            </div>
         </el-col>
     </el-row>
 
-    <el-row
-        type="flex"
-        justify="center"
-    >
+    <el-row>
+       <el-col :span="24">
+        <div style="margin-left: 5px;display: inline-block; width: 10px; height: 10px; background: #FF6666; border-radius: 50%"></div>
+        <span class="ss">吃货统计</span>
+      </el-col>
+      <el-col :span="24">
         <div
             id="demo"
             style="width: 100%; height: 500px; overflow: scorll"
         ></div>
+        </el-col>
             </el-row>
             </div>
 </template>
@@ -180,7 +165,8 @@
 
 
 <script>
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+
 import Red from './../assets/u107.png'
 import picOne from './../assets/u106.png'
 import picTwo from './../assets/u109.png'
@@ -237,12 +223,25 @@ export default {
                     trigger: 'item',
                     formatter: '{a} <br/>{b}: {c} ({d}%)'
                 },
-                color: ['#48cda6', '#968ade', '#fd87ab', '#FF69B4'], //,'#ffdf33'
+                color: ['#FF6666', '#33CC66', '#FF9966', '#9966CC', '#3399FF'],
+                // legend: {
+                //     type: 'scroll',
+                //     orient: 'vertical',
+                //     right: 50,
+                //     top: 130,
+                //     data:['旭日苑','东升苑','美广','超市','其它']
+                // },
                 series: [{
-                    name: '数据来源',
+                    name: '消费地点',
                     type: 'pie',
                     radius: ['50%', '70%'],
-                    avoidLabelOverlap: false,
+                    itemStyle: {
+                      emphasis: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                      }
+                    },
                     label: {
                         normal: {
                             show: false,
@@ -261,8 +260,9 @@ export default {
                             show: false
                         }
                     },
+                    avoidLabelOverlap: false,
                     data: [],
-                    // center: ['10%', '10%']
+                    // center: ['0%', '50%']
                 }]
             },
             getBarOption: {
@@ -296,6 +296,15 @@ export default {
                     type: 'bar',
                     barWidth: '60%',
                     data: [],
+                    label: {
+                      normal: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: 'black'
+                        }
+                      }
+                    },
                     itemStyle: {
                         //通常情况下：
                         normal: {
@@ -349,7 +358,7 @@ created() {
             })
             .then(function (res) {
                 if (res.data.status === 0) {
-                    _this.balance = parseInt(res.data.data[0].balance);
+                    _this.balance = res.data.data[0].balance;
                 } else {
                     _this.$message.error('获取失败');
                 }
@@ -368,7 +377,7 @@ created() {
             })
             .then(function (res) {
                 if (res.data.status === 0) {
-                    _this.cost = parseInt(res.data.cost);
+                    _this.cost = res.data.cost;
                 } else {
                     _this.$message.error('获取失败');
                 }
@@ -378,17 +387,19 @@ created() {
             })
 
         // 消费列表详情
+        // let beginWeek = dayjs().startOf('week').format('YYYY-MM-DD');
+        // let endWeek = dayjs().endOf('week').format('YYYY-MM-DD');
         _this
             .$http({
-                url: 'http://118.126.110.182:8002/api/getNewData',
+                url: 'http://118.126.110.182:8002/api/getOneWeekData',
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
-                }
+                },
             })
             .then(function (res) {
                 if (res.data.status === 0) {
-                    _this.dayData.pay = parseInt(res.data.cost);
+                    _this.dayData.pay = res.data.cost;
                     _this.dayData.data = res.data.data.slice(0, 3);
                 } else {
                     _this.$message.error('获取失败');
@@ -453,26 +464,26 @@ created() {
                 .then(function (res) {
                     if (res.data.status === 0) {
                         // 按区域消费统计
-                        _this.monthData.dirlist = res.data.dirlist[0]
+                        _this.monthData.dirlist = res.data.dirlist[0];
                         // 按吃货分类统计
-                        _this.monthData.toplist = res.data.toplist
+                        _this.monthData.toplist = res.data.toplist;
                         _this.linePie.setOption({
-                            title: {
-                                //标题组件
-                                text: '支出分类',
-                                top: '10px',
-                                left: '8px', //标题的位置 默认是left，其余还有center、right属性
-                                textStyle: {
-                                    color: '#696969',
-                                    fontSize: 14
-                                }
-                            },
+                            // title: {
+                            //     //标题组件
+                            //     text: '支出分类',
+                            //     top: '10px',
+                            //     left: '8px', //标题的位置 默认是left，其余还有center、right属性
+                            //     textStyle: {
+                            //         color: '#696969',
+                            //         fontSize: 14
+                            //     }
+                            // },
                             graphic: {
                                 type: 'text',
                                 left: 'center',
                                 top: 'center',
                                 style: {
-                                    text: parseInt(res.data.cost) + '\r\n总支出',
+                                    text: Number(res.data.cost).toFixed(1) + '\r\n总支出',
                                     textAlign: 'center',
                                     fill: '#000',
                                     width: 30,
@@ -506,7 +517,7 @@ created() {
                                     },
                                     {
                                         value: res.data.dirlist[0].dirq,
-                                        name: '其他'
+                                        name: '其它'
                                     }
                                 ]
                             }]
@@ -538,20 +549,20 @@ created() {
 
             for (let item of showData) {
                 titleArr.push(item.shopname)
-                valueArr.push(item.sum)
+                valueArr.push(Number(item.sum).toFixed(1))
             }
 
             this.lineBar.setOption({
-                title: {
-                    //标题组件
-                    text: '吃货统计',
-                    top: '10px',
-                    left: '8px', //标题的位置 默认是left，其余还有center、right属性
-                    textStyle: {
-                        color: '#696969',
-                        fontSize: 14
-                    }
-                },
+                // title: {
+                //     //标题组件
+                //     text: '吃货统计',
+                //     top: '10px',
+                //     left: '8px', //标题的位置 默认是left，其余还有center、right属性
+                //     textStyle: {
+                //         color: '#696969',
+                //         fontSize: 14
+                //     }
+                // },
                 xAxis: {
                     data: titleArr
                 },
@@ -566,10 +577,6 @@ created() {
 
 
 <style scoped>
-.payDetail {
-    padding: 5px 0;
-}
-
 .padding {
     padding: 5px 0;
 }
@@ -579,10 +586,7 @@ created() {
 }
 
 .middleInline {
-    display: inline;
-    /* vertical-align: middle; 居中对齐， */
-    position: absolute;
-    right: 30px;
+    float: right;
 }
 
 .icon {
@@ -596,8 +600,8 @@ created() {
     /* 居中对齐， */
     display: inline-block;
     margin-left: 10px;
-    width: 60%;
     font-size: 14px;
+    width: 60%;
 }
 
 .dirFont {
@@ -611,8 +615,8 @@ created() {
 }
 
 #pie {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 270px;
 }
 
 .qq {
@@ -696,11 +700,11 @@ created() {
     height: 50px;
     line-height: 50px;
     text-align: center;
-    padding-left: 130px;
+    padding-left: 95px;
 }
 
 .date {
-    padding: 5px 35px;
+    padding: 5px 20px;
     font-size: 14px;
 }
 
@@ -718,7 +722,7 @@ created() {
 }
 
 .con_flow {
-    margin: 10px 0 10px 25px;
+    margin: 20px 0 10px 25px;
 }
 
 .text-cash-span {
@@ -738,6 +742,6 @@ created() {
 
 .grid-content {
     background: #e4e4e4;
-    min-height: 25px;
+    height: 25px;
 }
 </style>

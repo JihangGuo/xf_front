@@ -2,7 +2,7 @@
 <div>
     <div class="logo_pic">
         <img
-            v-bind:src="imgUrl"
+            v-bind:src="logo"
             class="img"
             alt="智邮普创"
             style="border:#ccc solid 1px; border-radius: 50%"
@@ -72,11 +72,13 @@
 
 
 <script>
+import LOGO from "../assets/logo.jpg";
+
 export default {
     data() {
         return {
             checkImg: "http://118.126.110.182:8002/static/img/chckcode.jpg",
-            imgUrl: "http://118.126.110.182:8002/static/dist/src/assets/logo.jpg",
+            logo: LOGO,
             ruleForm: {
                 cardpwd: "",
                 validate: ""
@@ -84,12 +86,12 @@ export default {
             rules: {
                 cardpwd: [{
                     required: true,
-                    message: '请填写一卡通密码',
+                    message: '请输入正确的一卡通密码',
                     trigger: 'change'
                 }],
                 validate: [{
                     required: true,
-                    message: '请填写四位验证码',
+                    message: '请输入正确的验证码',
                     trigger: 'change',
                     len: 4,
                 }]
@@ -183,21 +185,21 @@ export default {
 
 <style>
 .indentify-form {
-    margin-left: 85px;
-    margin-top: 30px;
-    margin-bottom: 50px;
+   width: 80%;
+   margin: 10px auto;
+   margin-bottom: 50px; 
 }
 
 .indentify-form .identify {
-    width: 49%;
+    width: 75%;
 }
 
 .indentifyPicture {
+    float: right;
     vertical-align: middle;
     width: 25%;
     height: 40px;
     margin: 0;
-    padding-left: 27px;
 }
 
 .logo_pic {
